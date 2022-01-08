@@ -36,14 +36,17 @@ class Dev(Configuration):
     # Application definition
 
     INSTALLED_APPS = [
+
         'django.contrib.admin',
         'django.contrib.auth',
         'django.contrib.contenttypes',
         'django.contrib.sessions',
         'django.contrib.messages',
         'django.contrib.staticfiles',
-    
+
         'blango_auth',
+        'django_registration',
+        
         'blog',
         'crispy_forms',
         'crispy_bootstrap5',
@@ -117,7 +120,7 @@ class Dev(Configuration):
     # Internationalization
     # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-    LANGUAGE_CODE = 'en-us'
+    LANGUAGE_CODE = 'fa-ir'
 
     TIME_ZONE = values.Value("UTC")
 
@@ -202,6 +205,9 @@ class Dev(Configuration):
     INTERNAL_IPS = ["192.168.10.93"]
 
     AUTH_USER_MODEL = "blango_auth.User"
+
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+    ACCOUNT_ACTIVATION_DAYS = 7
 
 
 class Prod(Dev):
