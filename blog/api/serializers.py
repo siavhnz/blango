@@ -2,7 +2,7 @@ from rest_framework import serializers
 from blog.models import Post, Tag, Comment
 from blango_auth.models import User
 
-class TagField(serializers.slugRelatedField):
+class TagField(serializers.SlugRelatedField):
   
   def to_internal_value(self, data):
     try:
@@ -40,7 +40,7 @@ class PostSerializer(serializers.ModelSerializer):
     readonly = ["modified_at", "created_at"]
 
 class PostDetailSerializer(PostSerializer):
-  comment = CommentSerializer(many=True)
+  comments = CommentSerializer(many=True)
 
   def update(self, instance, validated_data):
     comments = validated_data.pop("comments")
