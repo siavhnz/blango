@@ -22,8 +22,12 @@ class AuthorProfile(models.Model):
 class Tag(models.Model):
   value = models.TextField(max_length=100, unique=True)
   
+  class Meta:
+    ordering = ["value"]
+
   def __str__(self):
     return self.value
+
 class Comment(models.Model):
     creator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     content = models.TextField()
@@ -44,6 +48,7 @@ class Post(models.Model):
     content = models.TextField()
     tags = models.ManyToManyField(Tag, related_name="posts")
     comments = GenericRelation(Comment)
+    
 
     def __str__(self):
         return self.title
