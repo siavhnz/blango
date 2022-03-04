@@ -23,6 +23,8 @@ import blango_auth.views
 from django_registration.backends.activation.views import RegistrationView
 from blango_auth.forms import BlangoRegistrationForm
 
+from django.conf.urls.static import static
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", blog.views.index),
@@ -42,10 +44,12 @@ urlpatterns = [
     path("accounts/profile/", blango_auth.views.profile, name="profile"),
 
     path("api/v1/", include("blog.api.urls")),
+    
+    path("post-table/", blog.views.post_table, name="blog-post-table"),
 ]
 
 
 if settings.DEBUG:
     urlpatterns += [
         path("__debug__/", include(debug_toolbar.urls)),
-    ]
+    ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
